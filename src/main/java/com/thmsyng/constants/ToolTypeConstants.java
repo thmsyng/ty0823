@@ -2,8 +2,8 @@ package com.thmsyng.constants;
 
 public enum ToolTypeConstants {
     LADDER ("Ladder", 1.99, true, true, false),
-    CHAINSAW ("Ladder", 1.49, true, false, true),
-    JACKHAMMER ("Ladder", 2.99, true, false, false);
+    CHAINSAW ("Chainsaw", 1.49, true, false, true),
+    JACKHAMMER ("Jackhammer", 2.99, true, false, false);
 
     private final String toolName;
     private final double toolPrice;
