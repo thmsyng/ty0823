@@ -2,6 +2,7 @@ package com.thmsyng;
 
 import java.util.Scanner;
 
+import static com.thmsyng.rentalservice.RentalService.checkout;
 import static com.thmsyng.utils.UserInputValidator.*;
 
 public class Main {
@@ -56,6 +57,7 @@ public class Main {
                 date = input;
 
                 //Add in a service that calls a checkout function here
+                checkout(toolCode, dayCount, discount, date);
             }
             else{
                 checkout = false;
