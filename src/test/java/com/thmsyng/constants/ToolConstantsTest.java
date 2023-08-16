@@ -7,16 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ToolConstantsTest {
-    ToolConstants chainsaw;
-    ToolConstants ladder;
-    ToolConstants jackhammerD;
-    ToolConstants jackhammerR;
+    Tool chainsaw;
+    Tool ladder;
+    Tool jackhammerD;
+    Tool jackhammerR;
     @BeforeEach
     void setUp(){
-        chainsaw = ToolConstants.CHNS;
-        ladder = ToolConstants.LADW;
-        jackhammerD = ToolConstants.JAKD;
-        jackhammerR = ToolConstants.JAKR;
+        chainsaw = Tool.CHNS;
+        ladder = Tool.LADW;
+        jackhammerD = Tool.JAKD;
+        jackhammerR = Tool.JAKR;
     }
 
     @Test
