@@ -1,6 +1,6 @@
 package com.thmsyng.constants;
 
-public enum ToolTypeConstants {
+public enum ToolType {
     LADDER ("Ladder", 1.99, true, true, false),
     CHAINSAW ("Chainsaw", 1.49, true, false, true),
     JACKHAMMER ("Jackhammer", 2.99, true, false, false);
@@ -11,7 +11,7 @@ public enum ToolTypeConstants {
     private final boolean weekendCharge;
     private final boolean holidayCharge;
 
-    ToolTypeConstants(String toolName, double toolPrice, boolean weekdayCharge, boolean weekendCharge, boolean holidayCharge){
+    ToolType(String toolName, double toolPrice, boolean weekdayCharge, boolean weekendCharge, boolean holidayCharge){
         this.toolName = toolName;
         this.toolPrice = toolPrice;
         this.weekdayCharge = weekdayCharge;
