@@ -14,7 +14,7 @@ class RentalServiceTest {
     private int discount;
     private String date;
     @Test
-    void checkoutScenario1DiscountException() {
+    void checkoutScenario1ADiscountException() {
         toolCode = "JAKR";
         rentalDays = 5;
         discount = 101;
@@ -22,7 +22,15 @@ class RentalServiceTest {
         assertThrows(DiscountException.class, () -> checkout(toolCode, rentalDays, discount, date));
     }
     @Test
-    void checkoutScenario1DayException() {
+    void checkoutScenario1BDiscountException() {
+        toolCode = "JAKR";
+        rentalDays = 5;
+        discount = -1;
+        date = "09/03/15";
+        assertThrows(DiscountException.class, () -> checkout(toolCode, rentalDays, discount, date));
+    }
+    @Test
+    void checkoutScenario1CDayException() {
         toolCode = "JAKR";
         rentalDays = 0;
         discount = 101;
