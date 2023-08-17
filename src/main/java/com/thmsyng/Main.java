@@ -31,10 +31,10 @@ public class Main {
             }
             if(isYes(input)){
                 System.out.println("What is the tool code?");
-                input = scan.next();
+                input = scan.next().toUpperCase();
                 while(!isValidToolCode(input)){
                     System.out.println("This is not a valid tool code, please retry: ");
-                    input = scan.next();
+                    input = scan.next().toUpperCase();
                 }
                 toolCode = input;
 
