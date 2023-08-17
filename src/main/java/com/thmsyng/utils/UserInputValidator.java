@@ -18,23 +18,26 @@ public final class UserInputValidator {
     }
 
     public static boolean isYes(String input){
-        return input.charAt(0) == 'Y';
+        return input.toUpperCase().charAt(0) == 'Y';
     }
 
     public static boolean isNo(String input){
-        return input.charAt(0) == 'N';
+        return input.toUpperCase().charAt(0) == 'N';
     }
 
     public static boolean isValidToolCode(String toolCode){
-        return EnumUtils.isValidEnum(Tool.class, toolCode);
+        return EnumUtils.isValidEnum(Tool.class, toolCode.toUpperCase());
     }
 
-    public static boolean isValidDayCount(String dayCount){
-        return NumberUtils.isDigits(dayCount) && Integer.parseInt(dayCount) > 0;
+    public static boolean isValidNumber(String input){
+        return NumberUtils.isDigits(input);
+    }
+    public static boolean isValidDayCount(int dayCount){
+        return dayCount > 0;
     }
 
-    public static boolean isValidDiscount(String discount){
-        return NumberUtils.isDigits(discount) && (0 <= Integer.parseInt(discount) && Integer.parseInt(discount) <= 100);
+    public static boolean isValidDiscount(int discount){
+        return (0 <= discount && discount <= 100);
     }
 
     public static boolean isValidDate(String date){
