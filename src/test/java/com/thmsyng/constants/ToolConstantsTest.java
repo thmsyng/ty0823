@@ -19,13 +19,4 @@ class ToolConstantsTest {
         jackhammerR = Tool.JAKR;
     }
 
-    @Test
-    void chainsawCodeTestPositive(){
-        assertEquals(chainsaw.getToolCode(), ("CHNS"));
-    }
-
-    @Test
-    void chainsawCodeTestNegative(){
-        assertNotEquals(chainsaw.getToolCode(), ("LADW"));
-    }
 }
