@@ -6,8 +6,6 @@ public class RentalService {
     }
 
     public static RentalAgreement checkout(String toolCode, int dayCount, int discount, String checkoutDate){
-        RentalAgreement agreement = null;
-        //build out the agreement later, maybe as a singleton
-        return agreement;
+        return new RentalAgreement(toolCode, dayCount, discount, checkoutDate);
     }
 }

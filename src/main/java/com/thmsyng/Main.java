@@ -1,5 +1,7 @@
 package com.thmsyng;
 
+import com.thmsyng.rentalservice.RentalAgreement;
+
 import java.util.Scanner;
 
 import static com.thmsyng.rentalservice.RentalService.checkout;
@@ -13,6 +15,8 @@ public class Main {
         int dayCount;
         int discount;
         String date;
+
+        RentalAgreement agreement;
 
         String input;
         boolean checkout = true;
@@ -56,8 +60,8 @@ public class Main {
                 }
                 date = input;
 
-                //Add in a service that calls a checkout function here
-                checkout(toolCode, dayCount, discount, date);
+                agreement = checkout(toolCode, dayCount, discount, date);
+                System.out.println(agreement);
             }
             else{
                 checkout = false;
