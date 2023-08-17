@@ -26,7 +26,7 @@ public final class UserInputValidator {
     }
 
     public static boolean isValidToolCode(String toolCode){
-        return EnumUtils.isValidEnum(Tool.class, toolCode.toUpperCase());
+        return EnumUtils.isValidEnum(Tool.class, toolCode);
     }
 
     public static boolean isValidNumber(String input){

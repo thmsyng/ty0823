@@ -1,15 +1,18 @@
 package com.thmsyng.rentalservice;
 
 import com.thmsyng.constants.Tool;
-import org.apache.commons.lang3.EnumUtils;
 
-import java.util.Date;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.*;
+
+import static com.thmsyng.utils.DateUtil.*;
 
 public class RentalAgreement {
     private Tool tool;
     private int rentalDays;
-    private Date checkoutDate;
-    private Date dueDate;
+    private LocalDate checkoutDate;
+    private LocalDate dueDate;
     private int chargableDays;
     private double chargeBeforeDiscount;
     private double discountPercent;
@@ -19,39 +22,58 @@ public class RentalAgreement {
     public RentalAgreement(String toolCode, int rentalDays, int discount, String date){
         tool = Tool.valueOf(toolCode);
         this.rentalDays = rentalDays;
-        checkoutDate = setCheckoutDate(date);
+        checkoutDate = convertToDate(date);
         discountPercent = discount/100.0;
-        dueDate = setDueDate(checkoutDate, rentalDays);
-        chargeBeforeDiscount = setChargeBeforeDiscount(tool.getToolType().getToolPrice(), chargableDays);
+        dueDate = getDueDate(checkoutDate, rentalDays);
+        chargableDays = setChargableDays(tool, checkoutDate, dueDate, rentalDays);
+        chargeBeforeDiscount = setChargeBeforeDiscount(tool, chargableDays);
         discountAmount = setDiscountAmount(chargeBeforeDiscount, discountPercent);
         finalCharge = setFinalCharge(chargeBeforeDiscount, discountAmount);
     }
-    //subtract
+
+    private int setChargableDays(Tool tool, LocalDate checkoutDate, LocalDate dueDate, int rentalDays) {
+        int days = rentalDays;
+        if(!tool.getToolType().hasWeekendCharge()){
+            //check if the dates have any weekends in between
+            days -= weekendsInBetween(checkoutDate, dueDate);
+        }
+        if(!tool.getToolType().hasHolidayCharge()){
+            //check if the dates have any holidays in between
+            days -= holidaysInBetween(checkoutDate, dueDate);
+        }
+        return days;
+    }
+
     private double setFinalCharge(double chargeBeforeDiscount, double discountAmount) {
         return chargeBeforeDiscount - discountAmount;
     }
 
     //Multiply and cast up
     private double setDiscountAmount(double chargeBeforeDiscount, double discountPercent) {
-        return chargeBeforeDiscount * discountPercent;
+        double amt = (chargeBeforeDiscount * discountPercent);
+
+        return Math.round(amt * 100.0)/100.0;
     }
 
-    //Convert the string date to java object Date
-    private Date setCheckoutDate(String date) {
-        return null;
-    }
-
-    //calculate the price * chargable days (remember to cast into xxx.xx format rounding up)
-    private double setChargeBeforeDiscount(double toolPrice, int chargableDays) {
-        return toolPrice * chargableDays;
-    }
-
-    //add the amount of rental days to the checkout date
-    private Date setDueDate(Date checkoutDate, int rentalDays) {
-        return null;
+    private double setChargeBeforeDiscount(Tool tool, int chargableDays) {
+        return tool.getToolType().getToolPrice() * chargableDays;
     }
 
     public String toString(){
-        return null;
+        String print = "\n\n\n----- Rental Agreement -----"
+                + "\nTool code: " + tool.name()
+                + "\nTool type: " + tool.getToolType().name()
+                + "\nTool brand: " + tool.getToolBrand()
+                + "\nRental days: " + rentalDays
+                + "\nCheckout date: " + checkoutDate
+                + "\nDue date: " + dueDate
+                + "\nDaily rental charge: " + tool.getToolType().getToolPrice()
+                + "\nCharge days: " + chargableDays
+                + "\nPre-discount charge: " + chargeBeforeDiscount
+                + "\nDiscount percent: " + discountPercent
+                + "\nDiscount amount: " + discountAmount
+                + "\nFinal charge: " + finalCharge
+                + "\n\n\n";
+        return print;
     }
 }
